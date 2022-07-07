@@ -36,6 +36,7 @@ function Particle(x, y, radius, color){
     this.radians = Math.random() * Math.PI*2;
     this.velocity = 0.05;
     this.rotationRadius = {x:randomIntFromRange(50, 120),y:randomIntFromRange(50, 120)};
+    this.lastMouse = {x:x, y:y};
 
     this.getOriginalRadius = function(){
         return originalRadius;
@@ -50,8 +51,11 @@ function Particle(x, y, radius, color){
 
     this.update = ()=>{
         this.radians += this.velocity;
-        this.x = mouse.x + Math.cos(this.radians) * this.rotationRadius.x;
-        this.y = mouse.y + Math.sin(this.radians) * this.rotationRadius.y;
+        // drag
+        this.lastMouse.x += (mouse.x - this.lastMouse.x) * 0.1;
+        this.lastMouse.y += (mouse.y - this.lastMouse.y) * 0.1;
+        this.x = this.lastMouse.x + Math.cos(this.radians) * this.rotationRadius.x;
+        this.y = this.lastMouse.y + Math.sin(this.radians) * this.rotationRadius.y;
         
         this.draw();
     }
@@ -60,7 +64,7 @@ function Particle(x, y, radius, color){
 let particles;
 function init(){
     particles = [];
-    for (let i = 0; i<100; i++){
+    for (let i = 0; i<30; i++){
         let radius = randomIntFromRange(3,8)
         let color = colors[randomIntFromRange(0,colors.length)]
         particles.push(new Particle(canvas.width/2, canvas.height/2, radius, color))
