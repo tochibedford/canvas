@@ -1,6 +1,6 @@
 # canvas-mouse-effects
 
-## Mouse follower effec done with HTML5 Canvas
+## Mouse follower effect done with HTML5 Canvas
 
 ### Now deployed at [https://canvas-mouse-effects.netlify.app/](https://canvas-mouse-effects.netlify.app/)
 
